@@ -5,6 +5,7 @@ import axios from 'axios';
 const SchoolsPage = () => {
   const [schools, setSchools] = useState([]);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +14,6 @@ const SchoolsPage = () => {
         if (response.data.success) {
           setSchools(response.data.data);
           console.log(response.data.data);
-          // Log the state after it has been updated
           console.log('data', schools);
         } else {
           setError(response.data.message);
@@ -26,16 +26,25 @@ const SchoolsPage = () => {
 
     fetchData();
   }, []);
+  const filteredSchools = schools.filter(school => {
+    return school.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  const handleSearch = event => {
+    setSearchTerm(event.target.value);
+  };
+
 
   return (
     <div className="bg-violet-300">
     
       <h1 className='text-center font-bold text-4xl mb-2 py-6 border-b-2  border-t-2 border-black'> Your School</h1>
+      <input type="text" className='ml-16 px-2 py-2' placeholder='Search...' value={searchTerm} onChange={handleSearch}></input>
       {error ? (
         <p>Error: {error}</p>
       ) : (
         <div className="flex flex-wrap justify-center">
-        {schools.map((school) => (
+        {filteredSchools.map((school) => (
           <div key={school.id} className="max-w-md rounded overflow-hidden bg-gradient-to-r from-blue-400 to-indigo-400 hover:from-indigo-400 hover:to-blue-400 shadow-lg m-4">
             <img className="w-96 h-48 object-cover" src={`/schoolImages/${school.image}`} alt={school.name} />
             <div className="px-6 py-4">

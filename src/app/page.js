@@ -128,7 +128,7 @@ const Home = () => {
           >
             Submit
           </button>
-          <Link href='/data'  className="bg-gradient-to-r text-center from-blue-400 to-indigo-400 hover:from-indigo-400 hover:to-blue-400  text-white font-semibold text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+          <Link to='/data'  className="bg-gradient-to-r text-center from-blue-400 to-indigo-400 hover:from-indigo-400 hover:to-blue-400  text-white font-semibold text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
           >
           
             View School Records
